@@ -8,6 +8,13 @@ import {
   Linkedin
 } from 'lucide-react';
 
+// Import images
+import googleImg from './assets/google.jpg';
+import fbImg from './assets/fb.jpg';
+import analyzImg from './assets/analyz.jpg';
+import roiImg from './assets/roi.jpg';
+import nikaImg from './assets/nika.jpeg';
+
 interface HeroProps {
   onContentReady: () => void;
 }
@@ -20,29 +27,25 @@ const portfolioData = [
     title: "Google Ads Campaign Strategy",
     content:
       "Develop comprehensive Google Ads campaigns that target the right audience, optimize for conversions, and maximize your return on ad spend with data-driven insights.",
-    srcImage:
-      "../src/assets/google.jpg",
+    srcImage: googleImg,
   },
   {
     title: "Meta Advertising Excellence",
     content:
       "Create high-performing Facebook and Instagram ad campaigns that engage your target audience and drive meaningful conversions across all Meta platforms.",
-    srcImage:
-      "../src/assets/fb.jpg",
+    srcImage: fbImg,
   },
   {
     title: "Performance Analytics & Optimization",
     content:
       "Monitor, analyze, and optimize your advertising campaigns with detailed performance metrics and continuous A/B testing to ensure maximum efficiency.",
-    srcImage:
-      "../src/assets/analyz.jpg",
+    srcImage: analyzImg,
   },
   {
     title: "ROI-Focused Campaign Management",
     content:
       "Manage your advertising budget strategically to achieve the highest return on investment while scaling your business growth sustainably.",
-    srcImage:
-      "../src/assets/roi.jpg",
+    srcImage: roiImg,
   },
 ];
 
@@ -220,7 +223,7 @@ export const Example = () => (
             <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-green-500/30 overflow-hidden group hover:border-green-500/50 transition-all duration-300">
               {/* Test Image */}
               <img 
-                src="../src/assets/nika.jpeg"
+                src={nikaImg}
                 alt="Nikoloz Gvarmiani - Digital Marketing Specialist"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
