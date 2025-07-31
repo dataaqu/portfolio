@@ -7,6 +7,7 @@ import {
   Instagram, 
   Linkedin
 } from 'lucide-react';
+import ScrambleHover from './cuicui/other/text-animation/scramble-hover/scramble';
 
 // Import images
 import googleImg from './assets/google.jpg';
@@ -180,9 +181,15 @@ export const Example = () => (
         <div className="space-y-4">
         
           <div className="h-1 w-24 bg-gradient-to-r from-green-400 to-blue-400 rounded-full"></div>
-          <p className="text- md:text-3xl text-green-400 font-semibold">
-            Google Ads Specialist & Meta Certified Advertiser
-          </p>
+          <ScrambleHover
+            text="Google Ads Specialist & Meta Certified Advertiser"
+            scrambleSpeed={40}
+            sequential={true}
+            revealDirection="start"
+            useOriginalCharsOnly={false}
+            className="text-md md:text-3xl text-green-400 font-semibold"
+            characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
+          />
         </div>
         
         <div className="space-y-4 text-gray-300 leading-relaxed">
