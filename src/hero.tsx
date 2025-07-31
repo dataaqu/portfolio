@@ -21,28 +21,28 @@ const portfolioData = [
     content:
       "Develop comprehensive Google Ads campaigns that target the right audience, optimize for conversions, and maximize your return on ad spend with data-driven insights.",
     srcImage:
-      "../public/google.jpg",
+      "../src/assets/google.jpg",
   },
   {
     title: "Meta Advertising Excellence",
     content:
       "Create high-performing Facebook and Instagram ad campaigns that engage your target audience and drive meaningful conversions across all Meta platforms.",
     srcImage:
-      "../public/fb.jpg",
+      "../src/assets/fb.jpg",
   },
   {
     title: "Performance Analytics & Optimization",
     content:
       "Monitor, analyze, and optimize your advertising campaigns with detailed performance metrics and continuous A/B testing to ensure maximum efficiency.",
     srcImage:
-      "../public/analyz.jpg",
+      "../src/assets/analyz.jpg",
   },
   {
     title: "ROI-Focused Campaign Management",
     content:
       "Manage your advertising budget strategically to achieve the highest return on investment while scaling your business growth sustainably.",
     srcImage:
-      "../public/roi.jpg",
+      "../src/assets/roi.jpg",
   },
 ];
 
@@ -220,7 +220,7 @@ export const Example = () => (
             <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-green-500/30 overflow-hidden group hover:border-green-500/50 transition-all duration-300">
               {/* Test Image */}
               <img 
-                src="../public/nika.jpeg"
+                src="../src/assets/nika.jpeg"
                 alt="Nikoloz Gvarmiani - Digital Marketing Specialist"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
