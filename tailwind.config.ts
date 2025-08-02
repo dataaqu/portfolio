@@ -2,6 +2,8 @@
 //@ts-ignore
 import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette'
 import svgToDataUri from 'mini-svg-data-uri'
+//@ts-ignore
+import lineClamp from '@tailwindcss/line-clamp'
 
 export default {
   content: [
@@ -32,6 +34,7 @@ export default {
     },
   },
   plugins: [
+    lineClamp,
     function ({ matchUtilities, theme }: any) {
       matchUtilities(
         {

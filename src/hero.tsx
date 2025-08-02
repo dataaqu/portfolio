@@ -9,6 +9,8 @@ import {
 } from 'lucide-react';
 import ScrambleHover from './cuicui/other/text-animation/scramble-hover/scramble';
 import AnimatedChartSection from './components/AnimatedChartSection';
+import WorkExperience from './components/WorkExperience';
+
 
 // Import images
 import googleImg from './assets/google.jpg';
@@ -80,8 +82,8 @@ function PortfolioFeatureComponent() {
           Digital Advertising Services That Drive Results
         </h2>
       </div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[600px]">
+        <div className="space-y-6 h-fit">
           {portfolioData.map((item, index) => (
             <button
               className="w-full"
@@ -140,10 +142,10 @@ function TextComponent({
   return (
     <div
       className={cn(
-        "transform-gpu rounded-lg border transition-all",
+        "transform-gpu rounded-lg border transition-all h-32",
         isOpen
           ? "border-green-500/20 bg-gradient-to-b from-green-900/10 to-blue-900/5 shadow-lg"
-          : "scale-90 border-transparent opacity-50 saturate-0",
+          : "scale-90 border-transparent opacity-50 saturate-0 h-20",
       )}
     >
       <div className="flex w-full items-center gap-4 p-4">
@@ -157,11 +159,11 @@ function TextComponent({
       <div
         className={cn(
           "w-full transform-gpu overflow-hidden text-left text-neutral-300 transition-all duration-500",
-          isOpen ? "max-h-64" : "max-h-0",
+          isOpen ? "opacity-100 h-20" : "opacity-0 h-0",
         )}
       >
-        <p className="p-4 text-lg leading-relaxed">{content}</p>
-        <div className="w-full px-4 pb-4">
+        <p className="px-4 pb-2 text-sm leading-relaxed line-clamp-2">{content}</p>
+        <div className="w-full px-4 pb-2">
           <div className="relative h-1 w-full overflow-hidden rounded-full bg-neutral-700">
             <div
               className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-blue-500 transition-all duration-100"
@@ -351,13 +353,20 @@ const Hero: React.FC<HeroProps> = ({ onContentReady }) => {
        
       </div>
       
-      {/* Animated Chart Section */}
+    
       <AnimatedChartSection />
+         <PortfolioFeatureComponent />
       
-      {/* Portfolio Feature Section */}
-      <div className="min-h-screen bg-black">
-        <PortfolioFeatureComponent />
-      </div>
+      <WorkExperience />
+      
+       
+     
+     
+  
+    
+      
+
+     
     </div>
   );
 };
