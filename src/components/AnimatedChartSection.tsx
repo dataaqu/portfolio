@@ -91,7 +91,7 @@ const ConversionChart = () => (
   <motion.div 
     initial={{ opacity: 0, y: 50, scale: 0.9 }}
     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+    transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
     viewport={{ once: true, amount: 0.3 }}
     className="relative"
   >
@@ -150,7 +150,7 @@ const ConversionChart = () => (
             className="fill-blue-500/20"
           />
           <motion.path
-            transition={{ delay: 0.2, duration: 2.5, ease: "easeInOut" }}
+            transition={{ delay: 1.5, duration: 2.5, ease: "easeInOut" }}
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true }}
@@ -176,7 +176,7 @@ const CostChart = () => (
   <motion.div 
     initial={{ opacity: 0, y: 50, scale: 0.9 }}
     whileInView={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+    transition={{ duration: 0.8, delay: 2.5, ease: "easeOut" }}
     viewport={{ once: true, amount: 0.3 }}
     className="relative"
   >
@@ -235,7 +235,7 @@ const CostChart = () => (
             className="fill-purple-500/20"
           />
           <motion.path
-            transition={{ delay: 0.4, duration: 2.5, ease: "easeInOut" }}
+            transition={{ delay: 2.4, duration: 2.5, ease: "easeInOut" }}
             initial={{ pathLength: 0 }}
             whileInView={{ pathLength: 1 }}
             viewport={{ once: true }}
