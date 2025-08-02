@@ -8,6 +8,7 @@ import {
   Linkedin
 } from 'lucide-react';
 import ScrambleHover from './cuicui/other/text-animation/scramble-hover/scramble';
+import AnimatedChartSection from './components/AnimatedChartSection';
 
 // Import images
 import googleImg from './assets/google.jpg';
@@ -349,6 +350,9 @@ const Hero: React.FC<HeroProps> = ({ onContentReady }) => {
         <Example />
        
       </div>
+      
+      {/* Animated Chart Section */}
+      <AnimatedChartSection />
       
       {/* Portfolio Feature Section */}
       <div className="min-h-screen bg-black">

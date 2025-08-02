@@ -130,7 +130,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           console.log('Backup timeout triggered - completing loader');
           onComplete();
         }
-      }, 6000);
+      }, 3500);
 
       // Cleanup
       return () => {
