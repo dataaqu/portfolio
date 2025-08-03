@@ -30,7 +30,6 @@ import patior from '/src/assets/logos/patio.png';
 import lilat from '/src/assets/logos/Lilat.png';
 import rom from '/src/assets/logos/RomClassic.png';
 import smile from '/src/assets/logos/SmileSolutions.png';
-import tml from '/src/assets/logos/TML.png';
 import urbanx from '/src/assets/logos/UrbanX.png';
 import win from '/src/assets/logos/Win-Win.png';     
 
@@ -319,16 +318,6 @@ const Cards = () => {
       rotate: "9deg",
       top: "90%",
       left: "40%"
-    },
-    {
-      company: "TML",
-      industry: "Fire Safety Systems",
-      platform: "Google",
-      stats: "+2.2x B2B lead volume | $0.60 CPC | Search impression share ↑",
-      logo: tml,
-      rotate: "-13deg",
-      top: "10%",
-      left: "70%"
     },
     {
       company: "UrbanX",
