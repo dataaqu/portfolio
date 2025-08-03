@@ -272,10 +272,10 @@ const AnimatedChartSection: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mt-20 mb-16"
         >
        
-          <h2 className="mb-4 font-semibold text-3xl md:test-4xl text-white tracking-tighter">
+          <h2 className="mb-4 font-semibold text-3xl md:test-4xl mt-4 text-white tracking-tighter">
             Data-Driven Results
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">

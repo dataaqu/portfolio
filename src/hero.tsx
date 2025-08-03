@@ -10,6 +10,7 @@ import {
 import ScrambleHover from './cuicui/other/text-animation/scramble-hover/scramble';
 import AnimatedChartSection from './components/AnimatedChartSection';
 import WorkExperience from './components/WorkExperience';
+import Contact from './components/Contact';
 
 
 // Import images
@@ -73,17 +74,17 @@ function PortfolioFeatureComponent() {
   }, [timer]);
 
   return (
-    <div className="container mx-auto px-4 py-20">
-      <div className="mb-20 text-center">
-        <p className="mb-2 font-medium text-neutral-400 text-sm uppercase tracking-wider">
+    <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+      <div className="mb-12 sm:mb-16 lg:mb-20 text-center">
+        <p className="mb-2 font-medium text-neutral-400 text-xs sm:text-sm uppercase tracking-wider">
           My Expertise
         </p>
-        <h2 className="mb-4 font-semibold text-3xl text-white tracking-tighter">
+        <h2 className="mb-4 font-semibold text-2xl sm:text-3xl text-white tracking-tighter px-2">
           Digital Advertising Services That Drive Results
         </h2>
       </div>
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 min-h-[600px]">
-        <div className="space-y-6 h-fit">
+      <div className="grid grid-cols-1 gap-8 sm:gap-8 lg:grid-cols-2 min-h-[600px] sm:min-h-[500px] lg:min-h-[600px]">
+        <div className="space-y-6 sm:space-y-6 h-fit">
           {portfolioData.map((item, index) => (
             <button
               className="w-full"
@@ -104,13 +105,13 @@ function PortfolioFeatureComponent() {
             </button>
           ))}
         </div>
-        <div className="h-full">
-          <div className="relative h-96 w-full overflow-hidden rounded-lg md:h-[500px]">
+        <div className="h-full mt-4 lg:mt-0">
+          <div className="relative h-64 sm:h-80 lg:h-96 xl:h-[500px] w-full overflow-hidden rounded-lg">
             {portfolioData.map((item, index) => (
               <img
                 alt={item.title}
                 className={cn(
-                  "absolute h-[500px] w-full transform-gpu rounded-lg object-cover transition-all duration-300",
+                  "absolute h-full w-full transform-gpu rounded-lg object-cover transition-all duration-300",
                   featureOpen === index ? "scale-100" : "scale-70",
                   featureOpen > index ? "translate-y-full" : "",
                 )}
@@ -142,28 +143,28 @@ function TextComponent({
   return (
     <div
       className={cn(
-        "transform-gpu rounded-lg border transition-all h-32",
+        "transform-gpu rounded-lg border transition-all",
         isOpen
-          ? "border-green-500/20 bg-gradient-to-b from-green-900/10 to-blue-900/5 shadow-lg"
-          : "scale-90 border-transparent opacity-50 saturate-0 h-20",
+          ? "h-40 sm:h-32 border-green-500/20 bg-gradient-to-b from-green-900/10 to-blue-900/5 shadow-lg"
+          : "h-20 sm:h-20 scale-90 border-transparent opacity-50 saturate-0",
       )}
     >
-      <div className="flex w-full items-center gap-4 p-4">
-        <p className="inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-green-500/20 text-green-400 font-medium">
+      <div className="flex w-full items-center gap-3 sm:gap-4 p-4 sm:p-4">
+        <p className="inline-flex size-8 sm:size-8 shrink-0 items-center justify-center rounded-md bg-green-500/20 text-green-400 font-medium text-sm sm:text-base">
           {number}
         </p>
-        <h2 className="text-left font-medium text-white text-xl">
+        <h2 className="text-left font-medium text-white text-sm sm:text-lg lg:text-xl leading-tight">
           {title}
         </h2>
       </div>
       <div
         className={cn(
           "w-full transform-gpu overflow-hidden text-left text-neutral-300 transition-all duration-500",
-          isOpen ? "opacity-100 h-20" : "opacity-0 h-0",
+          isOpen ? "opacity-100 h-28 sm:h-20" : "opacity-0 h-0",
         )}
       >
-        <p className="px-4 pb-2 text-sm leading-relaxed line-clamp-2">{content}</p>
-        <div className="w-full px-4 pb-2">
+        <p className="px-4 sm:px-4 pb-3 text-sm sm:text-sm leading-relaxed">{content}</p>
+        <div className="w-full px-4 sm:px-4 pb-2">
           <div className="relative h-1 w-full overflow-hidden rounded-full bg-neutral-700">
             <div
               className="absolute top-0 left-0 h-1 bg-gradient-to-r from-green-500 to-blue-500 transition-all duration-100"
@@ -178,10 +179,10 @@ function TextComponent({
 
 export const Example = () => (
   <AnimatedGridBackgroundSection>
-    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-6 hero-entrance">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center px-4 lg:px-6 hero-entrance py-8 lg:py-0">
       {/* Text Content Section */}
-      <div className="space-y-6 hero-content-left">
-        <div className="space-y-4">
+      <div className="space-y-4 sm:space-y-6 hero-content-left order-2 lg:order-1">
+        <div className="space-y-3 sm:space-y-4">
         
           <div className="h-1 w-24 bg-gradient-to-r from-green-400 to-blue-400 rounded-full"></div>
           <ScrambleHover
@@ -190,45 +191,45 @@ export const Example = () => (
             sequential={true}
             revealDirection="start"
             useOriginalCharsOnly={false}
-            className="text-md md:text-3xl text-green-400 font-semibold"
+            className="text-base sm:text-lg md:text-2xl lg:text-3xl text-green-400 font-semibold leading-tight"
             characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
           />
         </div>
         
-        <div className="space-y-4 text-gray-300 leading-relaxed">
-          <p className="text-base md:text-lg">
+        <div className="space-y-3 sm:space-y-4 text-gray-300 leading-relaxed">
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
             Hi, I'm Nikoloz Gvarmiani, a <span className="text-green-400 font-semibold">results-driven Google Ads Specialist and Meta Certified Advertiser</span> with a sharp focus on performance marketing and creative strategy. With hands-on experience across local and international brands, I build digital campaigns that don't just run—they convert.
           </p>
           
-          <p className="text-base md:text-lg">
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
             From reducing cost-per-result by 80% to scaling lead generation by 1,200%+, I know how to transform data into action. Whether it's Google Search, YouTube, Meta Ads, or advanced analytics with GA4 and GTM, I create data-backed campaigns that speak to the right audience, at the right time, with the right message.
           </p>
           
-          <p className="text-base md:text-lg">
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
             With a foundation in Digital Marketing studies at BTU, top rankings in Skillwill Neo, and real-world experience at companies like Tegeta Holding, Gepra, and Infinity Solutions, I bring the perfect balance of strategy, creativity, and execution.
           </p>
           
-          <p className="text-lg md:text-xl font-semibold text-transparent bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-transparent bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text leading-relaxed">
             Let's turn clicks into conversions.
           </p>
         </div>
 
         {/* Platform Expertise Cards */}
-        <div className="pt-8 w-full">
-          <h3 className="text-lg font-semibold text-white mb-6 text-center">
+        <div className="pt-4 sm:pt-6 lg:pt-8 w-full">
+          <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-white mb-3 sm:mb-4 lg:mb-6 text-center">
             Platform Expertise
           </h3>
-          <div className="w-full max-w-5xl mx-auto overflow-visible">
+          <div className="w-full max-w-5xl mx-auto overflow-visible relative">
             <AnimatedCardVariant1 />
           </div>
         </div>
       </div>
 
-      {/* Image Content Section */}
-      <div className="relative hero-content-right">
+      {/* Image Content Section - Improved Mobile Responsiveness */}
+      <div className="relative hero-content-right order-1 lg:order-2 mb-8 lg:mb-0">
         <div className="relative z-10">
-          {/* Profile Image Placeholder */}
-          <div className="relative mx-auto w-80 h-80 lg:w-96 lg:h-96">
+          {/* Profile Image - Better mobile sizing */}
+          <div className="relative mx-auto w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 via-blue-500/20 to-purple-500/20 rounded-2xl blur-xl"></div>
             <div className="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-green-500/30 overflow-hidden group hover:border-green-500/50 transition-all duration-300">
               {/* Test Image */}
@@ -242,9 +243,9 @@ export const Example = () => (
             </div>
           </div>
 
-          {/* Floating Stats Cards */}
+          {/* Floating Stats Cards - Better mobile positioning */}
           <motion.div 
-            className="absolute -top-4 -right-4 bg-black/80 backdrop-blur-sm border border-green-500/30 rounded-lg p-3"
+            className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 md:-top-6 md:-right-6 bg-black/80 backdrop-blur-sm border border-green-500/30 rounded-lg p-2 sm:p-3 min-w-[80px] sm:min-w-[90px]"
             initial={{ opacity: 0, scale: 0.8, y: -20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             whileHover={{ 
@@ -261,7 +262,7 @@ export const Example = () => (
             }}
           >
             <motion.div 
-              className="text-green-400 font-bold text-lg"
+              className="text-green-400 font-bold text-sm sm:text-base md:text-lg text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.0, duration: 0.5 }}
@@ -269,7 +270,7 @@ export const Example = () => (
               80%
             </motion.div>
             <motion.div 
-              className="text-gray-300 text-xs"
+              className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 2.2, duration: 0.5 }}
@@ -279,7 +280,7 @@ export const Example = () => (
           </motion.div>
           
           <motion.div 
-            className="absolute -bottom-4 -left-4 bg-black/80 backdrop-blur-sm border border-blue-500/30 rounded-lg p-3"
+            className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 md:-bottom-6 md:-left-6 bg-black/80 backdrop-blur-sm border border-blue-500/30 rounded-lg p-2 sm:p-3 min-w-[80px] sm:min-w-[90px]"
             initial={{ opacity: 0, scale: 0.8, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             whileHover={{ 
@@ -296,7 +297,7 @@ export const Example = () => (
             }}
           >
             <motion.div 
-              className="text-blue-400 font-bold text-lg"
+              className="text-blue-400 font-bold text-sm sm:text-base md:text-lg text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.7, duration: 0.5 }}
@@ -304,7 +305,7 @@ export const Example = () => (
               1200%+
             </motion.div>
             <motion.div 
-              className="text-gray-300 text-xs"
+              className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 3.9, duration: 0.5 }}
@@ -314,7 +315,7 @@ export const Example = () => (
           </motion.div>
         </div>
 
-        {/* Background Decoration */}
+        {/* Background Decoration - Adjusted for mobile */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-green-500/10 rounded-full animate-spin-slow"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-blue-500/10 rounded-full animate-spin-slow" style={{animationDirection: 'reverse'}}></div>
       </div>
@@ -326,16 +327,17 @@ const AnimatedGridBackgroundSection: React.FC<{ children?: React.ReactNode }> = 
   return (
     <div
       className={
-        'w-full h-full min-h-screen bg-black relative overflow-hidden flex items-center justify-center py-20'
+        'w-full min-h-screen bg-black relative overflow-hidden flex items-center justify-center py-8 sm:py-12 lg:py-20'
       }
     >
-      <div className={'w-full h-full relative z-20 text-white'}>{children}</div>
-      <div className={'absolute top-0 left-0 h-full w-full z-10'}>
+      <div className={'w-full h-full relative z-20 text-white px-2 sm:px-0'}>{children}</div>
+      {/* Grid tiles - Less intrusive on mobile */}
+      <div className={'absolute top-0 left-0 h-full w-full z-10 opacity-40 sm:opacity-60 lg:opacity-100'}>
         <Tiles rows={30} cols={12} />
       </div>
       {/* Additional glow effects */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/90 z-15 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-500/5 rounded-full blur-3xl z-15 pointer-events-none animate-pulse" />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] sm:w-[800px] h-[600px] sm:h-[800px] bg-green-500/5 rounded-full blur-3xl z-15 pointer-events-none animate-pulse" />
     </div>
   )
 }
@@ -358,6 +360,8 @@ const Hero: React.FC<HeroProps> = ({ onContentReady }) => {
          <PortfolioFeatureComponent />
       
       <WorkExperience />
+      
+      <Contact />
       
        
      
@@ -414,7 +418,7 @@ const cardData: CardType[] = [
     title: "Google",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <GoogleIcon className="size-5" />
+        <GoogleIcon className="size-4 sm:size-4 md:size-5" />
      
       </div>
     ),
@@ -423,7 +427,7 @@ const cardData: CardType[] = [
     title: "Facebook",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <Facebook className="size-5 text-[#1877F2]" />
+        <Facebook className="size-4 sm:size-4 md:size-5 text-[#1877F2]" />
        
       </div>
     ),
@@ -432,7 +436,7 @@ const cardData: CardType[] = [
     title: "Instagram",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <Instagram className="size-5 text-[#E4405F]" />
+        <Instagram className="size-4 sm:size-4 md:size-5 text-[#E4405F]" />
       
       </div>
     ),
@@ -441,7 +445,7 @@ const cardData: CardType[] = [
     title: "TikTok",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <TikTokIcon className="size-5 text-[#FF0050]" />
+        <TikTokIcon className="size-4 sm:size-4 md:size-5 text-[#FF0050]" />
         
       </div>
     ),
@@ -450,7 +454,7 @@ const cardData: CardType[] = [
     title: "LinkedIn",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <Linkedin className="size-5 text-[#0A66C2]" />
+        <Linkedin className="size-4 sm:size-4 md:size-5 text-[#0A66C2]" />
        
       </div>
     ),
@@ -459,7 +463,7 @@ const cardData: CardType[] = [
     title: "Etsy",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <EtsyIcon className="size-5" />
+        <EtsyIcon className="size-4 sm:size-4 md:size-5" />
        
       </div>
     ),
@@ -468,7 +472,7 @@ const cardData: CardType[] = [
     title: "Yandex",
     content: (
       <div className="flex flex-col items-center space-y-1">
-        <YandexIcon className="size-5" />
+        <YandexIcon className="size-4 sm:size-4 md:size-5" />
        
       </div>
     ),
@@ -477,18 +481,53 @@ const cardData: CardType[] = [
 
 function AnimatedCardVariant1() {
   return (
-    <div className="flex justify-center items-center gap-0.5 max-w-full overflow-visible px-4">
-      {cardData.map((card, index) => (
-        <Card
-          className={cn(
-            "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
-            index % 2 === 0 ? "rotate-6" : "-rotate-6",
-          )}
-          content={card.content}
-          key={card.title}
-          title={card.title}
-        />
-      ))}
+    <div className="w-full">
+      {/* Mobile: 2-row grid layout - fully visible cards */}
+      <div className="sm:hidden">
+        {/* First row: 4 cards */}
+        <div className="grid grid-cols-4 gap-1 mb-2 px-1">
+          {cardData.slice(0, 4).map((card) => (
+            <Card
+              className={cn(
+                "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
+                "rotate-0", // No rotation on mobile for better fit
+              )}
+              content={card.content}
+              key={card.title}
+              title={card.title}
+            />
+          ))}
+        </div>
+        {/* Second row: 3 cards centered */}
+        <div className="grid grid-cols-3 gap-1 max-w-[75%] mx-auto px-1">
+          {cardData.slice(4, 7).map((card) => (
+            <Card
+              className={cn(
+                "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
+                "rotate-0", // No rotation on mobile for better fit
+              )}
+              content={card.content}
+              key={card.title}
+              title={card.title}
+            />
+          ))}
+        </div>
+      </div>
+      
+      {/* Desktop: Original single row with rotation */}
+      <div className="hidden sm:flex justify-center items-center gap-0.5 px-4">
+        {cardData.map((card, index) => (
+          <Card
+            className={cn(
+              "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
+              index % 2 === 0 ? "rotate-6" : "-rotate-6",
+            )}
+            content={card.content}
+            key={card.title}
+            title={card.title}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -526,14 +565,14 @@ function Card({
   return (
     <div
       className={cn(
-        "group flex h-24 w-16 transform-gpu flex-col rounded-lg border border-gray-600/30 bg-gray-800/60 backdrop-blur-sm p-1.5 shadow-lg shadow-black/20 transition-all duration-300 hover:shadow-xl",
+        "group flex h-14 w-full sm:h-20 sm:w-12 md:h-24 md:w-16 transform-gpu flex-col rounded-lg border border-gray-600/30 bg-gray-800/60 backdrop-blur-sm p-1 sm:p-1 md:p-1.5 shadow-lg shadow-black/20 transition-all duration-300 hover:shadow-xl",
         getBrandHoverColor(title),
         className,
       )}
     >
       <div className="flex flex-1 items-center justify-center">{content}</div>
       <div className="space-y-0.5">
-        <p className="font-semibold text-gray-200 text-[9px] text-center leading-tight">
+        <p className="font-semibold text-gray-200 text-[7px] sm:text-[8px] md:text-[9px] text-center leading-tight">
           {title}
         </p>
       </div>

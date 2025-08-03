@@ -67,12 +67,7 @@ function App() {
         </div>
       )}
       
-      {/* Skip instruction for development */}
-      {loading && (
-        <div className="fixed top-4 right-4 text-white text-xs opacity-60 bg-black/20 px-2 py-1 rounded backdrop-blur-sm z-60">
-          Press SPACE to skip loader
-        </div>
-      )}
+   
     </div>
   );
 }
