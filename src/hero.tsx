@@ -12,12 +12,10 @@ import AnimatedChartSection from './components/AnimatedChartSection';
 import WorkExperience from './components/WorkExperience';
 import Contact from './components/Contact';
 
-
 // Import images
 import googleImg from './assets/google.jpg';
 import fbImg from './assets/fb.jpg';
 import analyzImg from './assets/analyz.jpg';
-import roiImg from './assets/roi.jpg';
 import nikaImg from './assets/nika.jpeg';
 
 interface HeroProps {
@@ -45,13 +43,7 @@ const portfolioData = [
     content:
       "Monitor, analyze, and optimize your advertising campaigns with detailed performance metrics and continuous A/B testing to ensure maximum efficiency.",
     srcImage: analyzImg,
-  },
-  {
-    title: "ROI-Focused Campaign Management",
-    content:
-      "Manage your advertising budget strategically to achieve the highest return on investment while scaling your business growth sustainably.",
-    srcImage: roiImg,
-  },
+  }
 ];
 
 // Feature component for portfolio showcase
@@ -121,6 +113,20 @@ function PortfolioFeatureComponent() {
               />
             ))}
           </div>
+        </div>
+      </div>
+      
+
+      <div className="text-center mt-16 mb-8 px-4">
+        <div className="relative">
+          <h3 className="text-white text-3xl md:text-4xl font-bold mb-4">
+            MY <span className="text-green-500">COLLABORATIONS</span>
+          </h3>
+          <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-blue-400 rounded-full mx-auto mb-4"></div>
+          <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+            Explore my partnerships and successful campaigns across diverse industries. 
+            Here you can see the real impact of data-driven advertising strategies.
+          </p>
         </div>
       </div>
     </div>
@@ -313,6 +319,77 @@ export const Example = () => (
               Lead Growth
             </motion.div>
           </motion.div>
+
+          {/* New Stats Cards */}
+          <motion.div 
+            className="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 md:-top-6 md:-left-6 bg-black/80 backdrop-blur-sm border border-purple-500/30 rounded-lg p-2 sm:p-3 min-w-[80px] sm:min-w-[90px]"
+            initial={{ opacity: 0, scale: 0.8, x: -20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            whileHover={{ 
+              scale: 1.05,
+              borderColor: "rgba(168, 85, 247, 0.6)",
+              boxShadow: "0 10px 25px rgba(168, 85, 247, 0.2)"
+            }}
+            transition={{ 
+              delay: 4.4,
+              duration: 0.8,
+              type: "spring",
+              stiffness: 100,
+              damping: 15
+            }}
+          >
+            <motion.div 
+              className="text-purple-400 font-bold text-sm sm:text-base md:text-lg text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 4.9, duration: 0.5 }}
+            >
+              1200+
+            </motion.div>
+            <motion.div 
+              className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 5.1, duration: 0.5 }}
+            >
+              Messages/Month
+            </motion.div>
+          </motion.div>
+
+          <motion.div 
+            className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 md:-bottom-6 md:-right-6 bg-black/80 backdrop-blur-sm border border-orange-500/30 rounded-lg p-2 sm:p-3 min-w-[80px] sm:min-w-[90px]"
+            initial={{ opacity: 0, scale: 0.8, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            whileHover={{ 
+              scale: 1.05,
+              borderColor: "rgba(249, 115, 22, 0.6)",
+              boxShadow: "0 10px 25px rgba(249, 115, 22, 0.2)"
+            }}
+            transition={{ 
+              delay: 5.6,
+              duration: 0.8,
+              type: "spring",
+              stiffness: 100,
+              damping: 15
+            }}
+          >
+            <motion.div 
+              className="text-orange-400 font-bold text-sm sm:text-base md:text-lg text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 6.1, duration: 0.5 }}
+            >
+              13→32%
+            </motion.div>
+            <motion.div 
+              className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 6.3, duration: 0.5 }}
+            >
+              Hook Rate
+            </motion.div>
+          </motion.div>
         </div>
 
         {/* Background Decoration - Adjusted for mobile */}
@@ -408,6 +485,23 @@ const YandexIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
+const DV360Icon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 2192.7 2428.1" className={className} fill="currentColor">
+    <g>
+      <path fill="#81C995" d="M1730.6,949.3c142.5-86.5,328.1-41.1,414.5,101.4c86.5,142.5,41.1,328.1-101.4,414.5
+        c-3.8,2.3-7.6,4.5-11.4,6.6L460.2,2377.1c-142.5,86.5-328.1,41.1-414.6-101.4c-86.5-142.5-41.1-328.1,101.4-414.6
+        c3.8-2.3,7.6-4.5,11.4-6.6L1730.6,949.3z"/>
+      <path fill="#34A853" d="M601,303.7C601.7,137.4,467.4,1.9,301.1,1.2c-21.4-0.1-42.7,2.1-63.7,6.5C96.5,42.3-2,169.5,0,314.7v1798.1
+        l600.4,10.9L601,303.7z"/>
+      <path fill="#5BB974" d="M1737.4,1472.9c145.3,75.3,324.1,27.1,411.9-111.1c84.4-142,37.7-325.6-104.3-410c-1.1-0.6-2.1-1.2-3.2-1.9
+        L459.2,43C318.3-42.1,135,3.1,49.8,144c-2.1,3.5-4.2,7.1-6.2,10.7C-40,297.8,8.2,481.7,151.3,565.4c1,0.6,2,1.1,3,1.7
+        L1737.4,1472.9z"/>
+      <path fill="#81C995" d="M2031.4,1475L600.5,2274.3v-686.6l1135.4-633.1c150.5-83.4,340.2-29,423.6,121.6c7.8,14,14.4,28.6,19.9,43.6
+        C2235.8,1183.6,2181.9,1391.6,2031.4,1475z"/>
+    </g>
+  </svg>
+);
+
 type CardType = {
   title: string;
   content: ReactNode;
@@ -477,6 +571,14 @@ const cardData: CardType[] = [
       </div>
     ),
   },
+  {
+    title: "DV360",
+    content: (
+      <div className="flex flex-col items-center space-y-1">
+        <DV360Icon className="size-4 sm:size-4 md:size-5" />
+      </div>
+    ),
+  },
 ];
 
 function AnimatedCardVariant1() {
@@ -498,9 +600,9 @@ function AnimatedCardVariant1() {
             />
           ))}
         </div>
-        {/* Second row: 3 cards centered */}
-        <div className="grid grid-cols-3 gap-1 max-w-[75%] mx-auto px-1">
-          {cardData.slice(4, 7).map((card) => (
+        {/* Second row: 4 cards */}
+        <div className="grid grid-cols-4 gap-1 px-1">
+          {cardData.slice(4, 8).map((card) => (
             <Card
               className={cn(
                 "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
@@ -557,6 +659,8 @@ function Card({
         return "hover:border-[#F16521]/50 hover:bg-[#F16521]/5";
       case "Yandex":
         return "hover:border-[#FFCC00]/50 hover:bg-[#FFCC00]/5";
+      case "DV360":
+        return "hover:border-[#4285F4]/50 hover:bg-[#4285F4]/5";
       default:
         return "hover:border-green-500/30 hover:bg-gray-700/60";
     }
