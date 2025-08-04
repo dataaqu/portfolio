@@ -32,7 +32,7 @@ const Contact = () => {
         <div className="flex justify-center max-w-sm mx-auto">
           {/* LinkedIn */}
           <motion.a
-            href="https://linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/nikoloz-gvarmiani-920410290/"
             target="_blank"
             rel="noopener noreferrer"
             className="group bg-neutral-900/50 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-6 text-center hover:border-blue-600/50 transition-all duration-300 w-full"
