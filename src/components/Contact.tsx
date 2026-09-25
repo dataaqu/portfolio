@@ -10,10 +10,10 @@ const Contact = () => {
   };
 
   return (
-    <section className="relative min-h-screen w-full bg-black flex items-center justify-center py-12 sm:py-16 lg:py-20">
+    <section className="relative min-h-screen w-full bg-black flex items-center justify-center py-20">
       <div className="container mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12 lg:mb-16">
+        <div className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -22,41 +22,20 @@ const Contact = () => {
             <h2 className="text-4xl md:text-6xl font-black text-white mb-4">
               GET IN <span className="text-green-500">TOUCH</span>
             </h2>
-           
+            <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto">
+              Ready to scale your business with high-converting ad campaigns? Let's connect and discuss your goals.
+            </p>
           </motion.div>
         </div>
 
-        {/* Contact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {/* Email */}
-          <motion.a
-            href="mailto:Ochigavaandro6@gmail.com"
-            className="group bg-neutral-900/50 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-6 text-center hover:border-green-500/50 transition-all duration-300"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 10px 25px rgba(34, 197, 94, 0.2)"
-            }}
-          >
-            <div className="w-20 h-20 mx-auto mb-4 bg-green-500/20 rounded-full flex items-center justify-center group-hover:bg-green-500/30 transition-colors">
-              <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <h3 className="text-white font-semibold mb-2 text-xl">Email Me</h3>
-            <p className="text-green-500 text-sm group-hover:text-green-400 transition-colors">
-              Ochigavaandro6@gmail.com
-            </p>
-          </motion.a>
-
+        {/* Contact Cards - LinkedIn Only */}
+        <div className="flex justify-center max-w-sm mx-auto">
           {/* LinkedIn */}
           <motion.a
-            href="https://www.linkedin.com/in/andro-ochigava-484109362/"
+            href="https://www.linkedin.com/in/nikoloz-gvarmiani-920410290/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group bg-neutral-900/50 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-6 text-center hover:border-blue-600/50 transition-all duration-300"
+            className="group bg-neutral-900/50 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-6 text-center hover:border-blue-600/50 transition-all duration-300 w-full"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -72,32 +51,7 @@ const Contact = () => {
             </div>
             <h3 className="text-white font-semibold mb-2 text-xl">Connect on LinkedIn</h3>
             <p className="text-[#0A66C2] text-sm group-hover:text-blue-400 transition-colors">
-              Let's network professionally
-            </p>
-          </motion.a>
-
-          {/* Facebook */}
-          <motion.a
-            href="https://www.facebook.com/share/19kWKZ8AZw/?mibextid=wwXIfr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group bg-neutral-900/50 backdrop-blur-sm border border-neutral-700/50 rounded-xl p-6 text-center hover:border-[#1877F2]/50 transition-all duration-300"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 10px 25px rgba(24, 119, 242, 0.2)"
-            }}
-          >
-            <div className="w-20 h-20 mx-auto mb-4 bg-[#1877F2]/20 rounded-full flex items-center justify-center group-hover:bg-[#1877F2]/30 transition-colors">
-              <svg className="w-10 h-10 text-[#1877F2]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </div>
-            <h3 className="text-white font-semibold mb-2 text-xl">Follow on Facebook</h3>
-            <p className="text-[#1877F2] text-sm group-hover:text-blue-400 transition-colors">
-              Stay connected socially
+              Let's network and explore opportunities
             </p>
           </motion.a>
         </div>
@@ -113,7 +67,7 @@ const Contact = () => {
             Available for new projects and collaborations
           </p>
           <motion.a
-            href="tel:+995599603352"
+            href="tel:+995592089355"
             className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500 to-blue-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:from-green-600 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-xl"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

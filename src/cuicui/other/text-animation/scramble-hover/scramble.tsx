@@ -18,7 +18,7 @@ const ScrambleHover: React.FC<ScrambleHoverProps> = ({
   revealDirection = 'start',
   useOriginalCharsOnly = false,
   className = '',
-  characters = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;\':./<>?'
+  characters = 'abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;\':\,./<>?'
 }) => {
   const [displayText, setDisplayText] = useState(text);
   const intervalRef = useRef<number | null>(null);
@@ -33,17 +33,16 @@ const ScrambleHover: React.FC<ScrambleHoverProps> = ({
 
   const scrambleText = () => {
     const textArray = text.split('');
-    const revealedIndices: Set<number> = new Set();
+    let revealedIndices: Set<number> = new Set();
     let step = 0;
 
     const getRevealOrder = () => {
       const indices = Array.from({ length: text.length }, (_, i) => i);
       
       switch (revealDirection) {
-        case 'center': {
+        case 'center':
           const center = Math.floor(text.length / 2);
           return indices.sort((a, b) => Math.abs(a - center) - Math.abs(b - center));
-        }
         case 'end':
           return indices.reverse();
         default: // 'start'
