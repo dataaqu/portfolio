@@ -187,7 +187,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
           {/* advertising text */}
           <h2 
             ref={advertisingTextRef}
-            className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-light text-white leading-none tracking-[0.4em] opacity-90"
+            className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-light text-white leading-none tracking-[0.2em] md:tracking-[0.3em] opacity-90 whitespace-nowrap"
             style={{
               textShadow: `
                 0 0 15px rgba(255, 255, 255, 0.5),
@@ -198,7 +198,7 @@ const Loader: React.FC<LoaderProps> = ({ onComplete }) => {
               filter: 'drop-shadow(0 0 15px rgba(255, 255, 255, 0.4))'
             }}
           >
-            ADVERTISER
+            MARKETING SPECIALIST
           </h2>
         </div>
       </div>

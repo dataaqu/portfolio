@@ -13,10 +13,16 @@ import WorkExperience from './components/WorkExperience';
 import Contact from './components/Contact';
 
 // Import images
-import googleImg from './assets/google.jpg';
-import fbImg from './assets/fb.jpg';
-import analyzImg from './assets/analyz.jpg';
 import nikaImg from './assets/nika.jpeg';
+import googleAdsOverviewImg from './assets/google/google-ads-overview.png';
+import googleAdsCampaigns1Img from './assets/google/google-ads-campaigns-1.png';
+import googleAdsCampaigns2Img from './assets/google/google-ads-campaigns-2.png';
+import metaEcomAugustImg from './assets/meta/meta-ecom-august.png';
+import metaEcomJuneImg from './assets/meta/meta-ecom-june.png';
+import metaAppCampaignsImg from './assets/meta/meta-app-campaigns.png';
+import ga4SalesOverviewImg from './assets/analytics/ga4-sales-overview.png';
+import ga4TrafficAugustImg from './assets/analytics/ga4-traffic-august.png';
+import ga4TrafficJulyImg from './assets/analytics/ga4-traffic-july.png';
 
 interface HeroProps {
   onContentReady: () => void;
@@ -30,21 +36,27 @@ const portfolioData = [
     title: "Google Ads Campaign Strategy",
     content:
       "Develop comprehensive Google Ads campaigns that target the right audience, optimize for conversions, and maximize your return on ad spend with data-driven insights.",
-    srcImage: googleImg,
+    images: [googleAdsOverviewImg, googleAdsCampaigns1Img, googleAdsCampaigns2Img],
   },
   {
     title: "Meta Advertising Excellence",
     content:
       "Create high-performing Facebook and Instagram ad campaigns that engage your target audience and drive meaningful conversions across all Meta platforms.",
-    srcImage: fbImg,
+    images: [metaEcomAugustImg, metaEcomJuneImg, metaAppCampaignsImg],
   },
   {
     title: "Performance Analytics & Optimization",
     content:
       "Monitor, analyze, and optimize your advertising campaigns with detailed performance metrics and continuous A/B testing to ensure maximum efficiency.",
-    srcImage: analyzImg,
+    images: [ga4SalesOverviewImg, ga4TrafficAugustImg, ga4TrafficJulyImg],
   }
 ];
+
+// Each slide in a carousel stays on screen this long; single images keep the original 10s
+const SLIDE_DURATION = 4000;
+const MIN_FEATURE_DURATION = 10000;
+const getFeatureDuration = (index: number) =>
+  Math.max(MIN_FEATURE_DURATION, portfolioData[index].images.length * SLIDE_DURATION);
 
 // Feature component for portfolio showcase
 function PortfolioFeatureComponent() {
@@ -59,11 +71,21 @@ function PortfolioFeatureComponent() {
   }, []);
 
   useEffect(() => {
-    if (timer > 10000) {
+    if (timer > getFeatureDuration(featureOpen)) {
       setFeatureOpen((prev) => (prev + 1) % portfolioData.length);
       setTimer(0);
     }
-  }, [timer]);
+  }, [timer, featureOpen]);
+
+  const activeImages = portfolioData[featureOpen].images;
+  const activeSlide = Math.min(
+    activeImages.length - 1,
+    Math.floor(timer / (getFeatureDuration(featureOpen) / activeImages.length)),
+  );
+
+  // The frame takes the active screenshot's own aspect ratio so the image fills it with no empty bands
+  const [aspectRatios, setAspectRatios] = useState<Record<string, number>>({});
+  const activeRatio = aspectRatios[activeImages[activeSlide]] ?? 16 / 10;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
@@ -90,7 +112,7 @@ function PortfolioFeatureComponent() {
               <TextComponent
                 content={item.content}
                 isOpen={featureOpen === index}
-                loadingWidthPercent={featureOpen === index ? timer / 100 : 0}
+                loadingWidthPercent={featureOpen === index ? (timer / getFeatureDuration(index)) * 100 : 0}
                 number={index + 1}
                 title={item.title}
               />
@@ -98,20 +120,55 @@ function PortfolioFeatureComponent() {
           ))}
         </div>
         <div className="h-full mt-4 lg:mt-0">
-          <div className="relative h-64 sm:h-80 lg:h-96 xl:h-[500px] w-full overflow-hidden rounded-lg">
+          <div
+            className="relative w-full overflow-hidden rounded-lg transition-[aspect-ratio] duration-500"
+            style={{ aspectRatio: activeRatio }}
+          >
             {portfolioData.map((item, index) => (
-              <img
-                alt={item.title}
+              <div
                 className={cn(
-                  "absolute h-full w-full transform-gpu rounded-lg object-cover transition-all duration-300",
+                  "absolute h-full w-full transform-gpu overflow-hidden rounded-lg bg-neutral-900 transition-all duration-300",
                   featureOpen === index ? "scale-100" : "scale-70",
                   featureOpen > index ? "translate-y-full" : "",
                 )}
                 key={item.title}
-                src={item.srcImage}
                 style={{ zIndex: portfolioData.length - index }}
-              />
+              >
+                {item.images.map((src, slideIndex) => (
+                  <img
+                    alt={`${item.title} ${slideIndex + 1}`}
+                    className={cn(
+                      "absolute inset-0 h-full w-full object-cover transition-opacity duration-700",
+                      (featureOpen === index ? activeSlide : 0) === slideIndex ? "opacity-100" : "opacity-0",
+                    )}
+                    key={src}
+                    onLoad={(e) => {
+                      const { naturalWidth, naturalHeight } = e.currentTarget;
+                      if (naturalWidth && naturalHeight) {
+                        setAspectRatios((prev) => ({ ...prev, [src]: naturalWidth / naturalHeight }));
+                      }
+                    }}
+                    src={src}
+                  />
+                ))}
+              </div>
             ))}
+            {activeImages.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-2 rounded-full bg-black/60 px-3 py-2 backdrop-blur-sm">
+                {activeImages.map((src, slideIndex) => (
+                  <button
+                    aria-label={`Show slide ${slideIndex + 1}`}
+                    className={cn(
+                      "h-2 rounded-full transition-all duration-300",
+                      activeSlide === slideIndex ? "w-6 bg-green-400" : "w-2 bg-white/50 hover:bg-white/80",
+                    )}
+                    key={src}
+                    onClick={() => setTimer(slideIndex * (getFeatureDuration(featureOpen) / activeImages.length))}
+                    type="button"
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -120,7 +177,7 @@ function PortfolioFeatureComponent() {
       <div className="text-center mt-16 mb-8 px-4">
         <div className="relative">
           <h3 className="text-white text-3xl md:text-4xl font-bold mb-4">
-            MY <span className="text-green-500">COLLABORATIONS</span>
+            My Small Freelance <span className="text-green-500">Projects</span>
           </h3>
           <div className="w-24 h-1 bg-gradient-to-r from-green-400 to-blue-400 rounded-full mx-auto mb-4"></div>
           <p className="text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
@@ -185,14 +242,14 @@ function TextComponent({
 
 export const Example = () => (
   <AnimatedGridBackgroundSection>
-    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center px-4 lg:px-6 hero-entrance py-8 lg:py-0">
+    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-start px-4 lg:px-6 hero-entrance py-8 lg:py-0">
       {/* Text Content Section */}
       <div className="space-y-4 sm:space-y-6 hero-content-left order-2 lg:order-1">
         <div className="space-y-3 sm:space-y-4">
         
           <div className="h-1 w-24 bg-gradient-to-r from-green-400 to-blue-400 rounded-full"></div>
           <ScrambleHover
-            text="Google Ads Specialist & Meta Certified Advertiser"
+            text="Digital Marketing Specialist & Media Buyer"
             scrambleSpeed={40}
             sequential={true}
             revealDirection="start"
@@ -204,35 +261,38 @@ export const Example = () => (
         
         <div className="space-y-3 sm:space-y-4 text-gray-300 leading-relaxed">
           <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
-            Hi, I'm Nikoloz Gvarmiani, a <span className="text-green-400 font-semibold">results-driven Google Ads Specialist and Meta Certified Advertiser</span> with a sharp focus on performance marketing and creative strategy. With hands-on experience across local and international brands, I build digital campaigns that don't just run—they convert.
+            Hi, I’m Nikoloz Gvarmiani, a <span className="text-green-400 font-semibold">performance-focused Digital Marketing Specialist and Media Buyer</span> with hands-on experience managing e-commerce and lead generation campaigns across local and international markets.
           </p>
-          
-          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
-            From reducing cost-per-result by 80% to scaling lead generation by 1,200%+, I know how to transform data into action. Whether it's Google Search, YouTube, Meta Ads, or advanced analytics with GA4 and GTM, I create data-backed campaigns that speak to the right audience, at the right time, with the right message.
-          </p>
-          
-          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
-            With a foundation in Digital Marketing studies at BTU, top rankings in Skillwill Neo, and real-world experience at companies like Tegeta Holding, Gepra, and Infinity Solutions, I bring the perfect balance of strategy, creativity, and execution.
-          </p>
-          
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-transparent bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text leading-relaxed">
-            Let's turn clicks into conversions.
-          </p>
-        </div>
 
-        {/* Platform Expertise Cards */}
-        <div className="pt-4 sm:pt-6 lg:pt-8 w-full">
-          <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-white mb-3 sm:mb-4 lg:mb-6 text-center">
-            Platform Expertise
-          </h3>
-          <div className="w-full max-w-5xl mx-auto overflow-visible relative">
-            <AnimatedCardVariant1 />
-          </div>
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
+            My core expertise is in Meta Ads, Google Ads, Criteo, and performance marketing, with experience managing campaigns from strategy and media planning to execution, optimization, attribution, and reporting. I’ve worked with e-commerce brands generating $2M+ in monthly revenue and managed advertising spend of $700K–$800K+ per month across multiple channels.
+          </p>
+
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
+            I focus on the full customer journey - from audience research, creative strategy, and campaign structure to funnels, landing pages, tracking, attribution, and conversion optimization. I work with tools including GA4, Google Tag Manager, Northbeam, Meta Pixel/CAPI, and platform analytics to make decisions based on real performance data.
+          </p>
+
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
+            My experience includes working with international e-commerce brands across the US and UK markets, as well as local businesses and agencies. I’ve also worked as an Advertising Lead, managing a team of 5 and overseeing projects end-to-end, from client communication and strategy to execution and reporting.
+          </p>
+
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
+            I combine analytical thinking with creative strategy, using data to understand what works, why it works, and how to scale it sustainably.
+          </p>
+
+          <p className="text-sm sm:text-base md:text-base lg:text-lg leading-relaxed">
+            I’m currently pursuing a Master’s degree in Data-Driven Digital Marketing, further strengthening my expertise in analytics, performance marketing, and data-driven decision-making.
+          </p>
+
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-transparent bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text leading-relaxed">
+            My goal is simple: build and scale advertising systems that generate measurable business growth, not just clicks and impressions.
+          </p>
         </div>
       </div>
 
       {/* Image Content Section - Improved Mobile Responsiveness */}
-      <div className="relative hero-content-right order-1 lg:order-2 mb-8 lg:mb-0">
+      <div className="hero-content-right order-1 lg:order-2 mb-8 lg:mb-0 lg:pt-12">
+        <div className="relative">
         <div className="relative z-10">
           {/* Profile Image - Better mobile sizing */}
           <div className="relative mx-auto w-56 h-56 sm:w-64 sm:h-64 md:w-80 md:h-80 lg:w-96 lg:h-96">
@@ -273,7 +333,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 3.0, duration: 0.5 }}
             >
-              80%
+              $2M+
             </motion.div>
             <motion.div 
               className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
@@ -281,7 +341,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 2.2, duration: 0.5 }}
             >
-              Cost Reduction
+              Monthly Revenue
             </motion.div>
           </motion.div>
           
@@ -308,7 +368,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 3.7, duration: 0.5 }}
             >
-              1200%+
+              3.8x+
             </motion.div>
             <motion.div 
               className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
@@ -316,7 +376,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 3.9, duration: 0.5 }}
             >
-              Lead Growth
+              MER
             </motion.div>
           </motion.div>
 
@@ -344,7 +404,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 4.9, duration: 0.5 }}
             >
-              1200+
+              $800K+
             </motion.div>
             <motion.div 
               className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
@@ -352,7 +412,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 5.1, duration: 0.5 }}
             >
-              Messages/Month
+              Monthly Ad Spend
             </motion.div>
           </motion.div>
 
@@ -379,7 +439,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 6.1, duration: 0.5 }}
             >
-              13→32%
+              US + UK
             </motion.div>
             <motion.div 
               className="text-gray-300 text-[9px] sm:text-[10px] md:text-xs text-center"
@@ -387,7 +447,7 @@ export const Example = () => (
               animate={{ opacity: 1 }}
               transition={{ delay: 6.3, duration: 0.5 }}
             >
-              Hook Rate
+              Markets Managed
             </motion.div>
           </motion.div>
         </div>
@@ -395,6 +455,17 @@ export const Example = () => (
         {/* Background Decoration - Adjusted for mobile */}
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] border border-green-500/10 rounded-full animate-spin-slow"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] border border-blue-500/10 rounded-full animate-spin-slow" style={{animationDirection: 'reverse'}}></div>
+        </div>
+
+        {/* Platform Expertise Cards */}
+        <div className="relative z-20 pt-10 sm:pt-12 lg:pt-16 w-full">
+          <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-white mb-3 sm:mb-4 lg:mb-6 text-center">
+            Platform Expertise
+          </h3>
+          <div className="w-full max-w-5xl mx-auto overflow-visible relative">
+            <AnimatedCardVariant1 />
+          </div>
+        </div>
       </div>
     </div>
   </AnimatedGridBackgroundSection>
@@ -427,7 +498,7 @@ const Hero: React.FC<HeroProps> = ({ onContentReady }) => {
   return (
     <div className="bg-black">
       {/* Main Hero Section - Made shorter */}
-      <div className="h-screen">
+      <div className="min-h-screen">
         <Example />
        
       </div>
@@ -499,6 +570,35 @@ const DV360Icon = ({ className }: { className?: string }) => (
       <path fill="#81C995" d="M2031.4,1475L600.5,2274.3v-686.6l1135.4-633.1c150.5-83.4,340.2-29,423.6,121.6c7.8,14,14.4,28.6,19.9,43.6
         C2235.8,1183.6,2181.9,1391.6,2031.4,1475z"/>
     </g>
+  </svg>
+);
+
+const CriteoIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <rect x="3" y="3" width="18" height="18" rx="3" fill="#FE5000"/>
+    <text x="12" y="16" textAnchor="middle" fontSize="14" fontWeight="bold" fill="white">C</text>
+  </svg>
+);
+
+const NorthbeamIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <rect x="3" y="3" width="18" height="18" rx="3" fill="#FFFFFF"/>
+    <text x="12" y="16" textAnchor="middle" fontSize="14" fontWeight="bold" fill="black">N</text>
+  </svg>
+);
+
+const GA4Icon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <rect x="15" y="2" width="6" height="20" rx="3" fill="#F9AB00"/>
+    <rect x="9" y="9" width="6" height="13" rx="3" fill="#E37400"/>
+    <circle cx="6" cy="19" r="3" fill="#E37400"/>
+  </svg>
+);
+
+const GTMIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+    <rect x="4.5" y="4.5" width="15" height="15" rx="2.5" transform="rotate(45 12 12)" fill="#4285F4"/>
+    <rect x="9" y="9" width="6" height="6" rx="1" transform="rotate(45 12 12)" fill="#FFFFFF"/>
   </svg>
 );
 
@@ -579,55 +679,81 @@ const cardData: CardType[] = [
       </div>
     ),
   },
+  {
+    title: "Criteo",
+    content: (
+      <div className="flex flex-col items-center space-y-1">
+        <CriteoIcon className="size-4 sm:size-4 md:size-5" />
+      </div>
+    ),
+  },
+  {
+    title: "Northbeam",
+    content: (
+      <div className="flex flex-col items-center space-y-1">
+        <NorthbeamIcon className="size-4 sm:size-4 md:size-5" />
+      </div>
+    ),
+  },
+  {
+    title: "GA4",
+    content: (
+      <div className="flex flex-col items-center space-y-1">
+        <GA4Icon className="size-4 sm:size-4 md:size-5" />
+      </div>
+    ),
+  },
+  {
+    title: "Google Tag Manager",
+    content: (
+      <div className="flex flex-col items-center space-y-1">
+        <GTMIcon className="size-4 sm:size-4 md:size-5" />
+      </div>
+    ),
+  },
 ];
+
+const chunk = <T,>(items: T[], size: number): T[][] =>
+  Array.from({ length: Math.ceil(items.length / size) }, (_, i) => items.slice(i * size, (i + 1) * size));
 
 function AnimatedCardVariant1() {
   return (
     <div className="w-full">
-      {/* Mobile: 2-row grid layout - fully visible cards */}
-      <div className="sm:hidden">
-        {/* First row: 4 cards */}
-        <div className="grid grid-cols-4 gap-1 mb-2 px-1">
-          {cardData.slice(0, 4).map((card) => (
-            <Card
-              className={cn(
-                "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
-                "rotate-0", // No rotation on mobile for better fit
-              )}
-              content={card.content}
-              key={card.title}
-              title={card.title}
-            />
-          ))}
-        </div>
-        {/* Second row: 4 cards */}
-        <div className="grid grid-cols-4 gap-1 px-1">
-          {cardData.slice(4, 8).map((card) => (
-            <Card
-              className={cn(
-                "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
-                "rotate-0", // No rotation on mobile for better fit
-              )}
-              content={card.content}
-              key={card.title}
-              title={card.title}
-            />
-          ))}
-        </div>
+      {/* Mobile: rows of 4 - fully visible cards */}
+      <div className="sm:hidden space-y-2">
+        {chunk(cardData, 4).map((row, rowIndex) => (
+          <div className="grid grid-cols-4 gap-1 px-1" key={rowIndex}>
+            {row.map((card) => (
+              <Card
+                className={cn(
+                  "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
+                  "rotate-0", // No rotation on mobile for better fit
+                )}
+                content={card.content}
+                key={card.title}
+                title={card.title}
+              />
+            ))}
+          </div>
+        ))}
       </div>
-      
-      {/* Desktop: Original single row with rotation */}
-      <div className="hidden sm:flex justify-center items-center gap-0.5 px-4">
-        {cardData.map((card, index) => (
-          <Card
-            className={cn(
-              "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
-              index % 2 === 0 ? "rotate-6" : "-rotate-6",
-            )}
-            content={card.content}
-            key={card.title}
-            title={card.title}
-          />
+
+      {/* Desktop: rows of 6 with rotation */}
+      <div className="hidden sm:flex flex-col items-center gap-4 px-4">
+        {chunk(cardData, 6).map((row, rowIndex) => (
+          <div className="flex justify-center items-center gap-0.5" key={rowIndex}>
+            {row.map((card, index) => (
+              <Card
+                className={cn(
+                  "transform-gpu hover:rotate-0 hover:scale-110 transition-all duration-300 flex-shrink-0",
+                  index % 2 === 0 ? "rotate-6" : "-rotate-6",
+                )}
+                content={card.content}
+                key={card.title}
+                title={card.title}
+              />
+            ))}
+          </div>
         ))}
       </div>
     </div>
@@ -660,6 +786,14 @@ function Card({
       case "Yandex":
         return "hover:border-[#FFCC00]/50 hover:bg-[#FFCC00]/5";
       case "DV360":
+        return "hover:border-[#4285F4]/50 hover:bg-[#4285F4]/5";
+      case "Criteo":
+        return "hover:border-[#FE5000]/50 hover:bg-[#FE5000]/5";
+      case "Northbeam":
+        return "hover:border-white/40 hover:bg-white/5";
+      case "GA4":
+        return "hover:border-[#F9AB00]/50 hover:bg-[#F9AB00]/5";
+      case "Google Tag Manager":
         return "hover:border-[#4285F4]/50 hover:bg-[#4285F4]/5";
       default:
         return "hover:border-green-500/30 hover:bg-gray-700/60";
